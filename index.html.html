@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GTM AI Market Diagnostics - B2B Fusion Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /*
+   * B2B Fusion - CMO Diagnostic Dashboard
+   * All classes prefixed with "b2bf-" to avoid Divi/WordPress CSS conflicts.
+   * Safe to embed inside a Divi Code Module or upload standalone.
+   */
+
+  :root {
+    --b2bf-primary: #1B2A4A;
+    --b2bf-accent: #E8553D;
+    --b2bf-accent-hover: #D44530;
+    --b2bf-light-bg: #F7F8FA;
+    --b2bf-card-bg: #FFFFFF;
+    --b2bf-text-primary: #1B2A4A;
+    --b2bf-text-secondary: #5A6478;
+    --b2bf-text-light: #8B95A5;
+    --b2bf-border: #E2E6ED;
+    --b2bf-card-shadow: 0 2px 12px rgba(27,42,74,0.06);
+    --b2bf-card-hover-shadow: 0 8px 30px rgba(27,42,74,0.12);
+  }
+
+  .b2bf-wrap { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--b2bf-text-primary); line-height: 1.6; }
+  .b2bf-wrap *, .b2bf-wrap *::before, .b2bf-wrap *::after { box-sizing: border-box; }
+
+  /* Header */
+  .b2bf-header {
+    background: var(--b2bf-primary);
+    padding: 20px 0;
+    text-align: center;
+  }
+  .b2bf-header-logo {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0;
+  }
+
+  /* Hero */
+  .b2bf-hero {
+    background: linear-gradient(135deg, var(--b2bf-primary) 0%, #2C3E6B 100%);
+    color: #fff;
+    text-align: center;
+    padding: 60px 24px 50px;
+  }
+  .b2bf-badge {
+    display: inline-block;
+    background: rgba(232,85,61,0.15);
+    color: var(--b2bf-accent);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(232,85,61,0.3);
+  }
+  .b2bf-hero h1 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0 auto 16px;
+    max-width: 700px;
+    color: #fff;
+  }
+  .b2bf-hero p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.75);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* Main */
+  .b2bf-main {
+    max-width: 960px;
+    margin: -30px auto 0;
+    padding: 0 24px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Instructions */
+  .b2bf-instructions {
+    text-align: center;
+    margin-bottom: 36px;
+    background: var(--b2bf-card-bg);
+    border-radius: 16px;
+    padding: 28px 32px;
+    box-shadow: var(--b2bf-card-shadow);
+    border: 1px solid var(--b2bf-border);
+  }
+  .b2bf-instructions h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--b2bf-text-primary);
+  }
+  .b2bf-instructions p {
+    font-size: 15px;
+    color: var(--b2bf-text-secondary);
+    margin: 0;
+  }
+
+  /* Cards Grid */
+  .b2bf-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 36px;
+  }
+
+  .b2bf-card {
+    background: var(--b2bf-card-bg);
+    border: 2px solid var(--b2bf-border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    box-shadow: var(--b2bf-card-shadow);
+  }
+  .b2bf-card:hover {
+    box-shadow: var(--b2bf-card-hover-shadow);
+    border-color: #C5CCD8;
+    transform: translateY(-2px);
+  }
+  .b2bf-card.b2bf-selected {
+    border-color: var(--b2bf-accent);
+    background: #FFF8F6;
+    box-shadow: 0 0 0 3px rgba(232,85,61,0.12), var(--b2bf-card-hover-shadow);
+  }
+
+  .b2bf-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  .b2bf-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: var(--b2bf-text-primary);
+    padding-right: 30px;
+  }
+  .b2bf-card p {
+    font-size: 14px;
+    color: var(--b2bf-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .b2bf-check {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 26px;
+    height: 26px;
+    border: 2px solid var(--b2bf-border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    background: #fff;
+  }
+  .b2bf-selected .b2bf-check {
+    background: var(--b2bf-accent);
+    border-color: var(--b2bf-accent);
+  }
+  .b2bf-check svg {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .b2bf-selected .b2bf-check svg {
+    opacity: 1;
+  }
+
+  /* Card icon colors */
+  .b2bf-icon-perception { background: #EEF2FF; color: #6366F1; }
+  .b2bf-icon-demandgen { background: #FFF7ED; color: #EA580C; }
+  .b2bf-icon-sov { background: #F0FDF4; color: #16A34A; }
+  .b2bf-icon-seo { background: #FDF2F8; color: #DB2777; }
+  .b2bf-icon-influencer { background: #EFF6FF; color: #2563EB; }
+  .b2bf-icon-trigger { background: #FEF9C3; color: #CA8A04; }
+
+  /* Form */
+  .b2bf-form {
+    background: var(--b2bf-card-bg);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: var(--b2bf-card-shadow);
+    border: 1px solid var(--b2bf-border);
+  }
+
+  .b2bf-email-row {
+    display: flex;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .b2bf-email-input {
+    flex: 1;
+    padding: 14px 18px;
+    font-size: 15px;
+    font-family: inherit;
+    border: 2px solid var(--b2bf-border);
+    border-radius: 12px;
+    outline: none;
+    transition: border-color 0.2s ease;
+    color: var(--b2bf-text-primary);
+    background: #fff;
+  }
+  .b2bf-email-input:focus {
+    border-color: var(--b2bf-accent);
+  }
+  .b2bf-email-input::placeholder {
+    color: var(--b2bf-text-light);
+  }
+
+  .b2bf-submit {
+    padding: 14px 32px;
+    background: var(--b2bf-accent);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .b2bf-submit:hover {
+    background: var(--b2bf-accent-hover);
+    transform: translateY(-1px);
+  }
+  .b2bf-submit:disabled {
+    background: #C5CCD8;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .b2bf-form-note {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--b2bf-text-light);
+    text-align: center;
+  }
+
+  .b2bf-count {
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: var(--b2bf-text-secondary);
+    font-weight: 500;
+  }
+  .b2bf-count span {
+    color: var(--b2bf-accent);
+    font-weight: 700;
+  }
+
+  /* Success State */
+  .b2bf-success {
+    display: none;
+    text-align: center;
+    padding: 48px 32px;
+    background: var(--b2bf-card-bg);
+    border-radius: 16px;
+    box-shadow: var(--b2bf-card-shadow);
+    border: 1px solid var(--b2bf-border);
+  }
+  .b2bf-success.b2bf-visible {
+    display: block;
+    animation: b2bfFadeIn 0.4s ease;
+  }
+  .b2bf-success-icon {
+    width: 64px;
+    height: 64px;
+    background: #F0FDF4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 28px;
+  }
+  .b2bf-success h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+  .b2bf-success p {
+    font-size: 15px;
+    color: var(--b2bf-text-secondary);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  /* Footer */
+  .b2bf-footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+    color: var(--b2bf-text-light);
+    border-top: 1px solid var(--b2bf-border);
+    background: #fff;
+  }
+  .b2bf-footer a {
+    color: var(--b2bf-accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  /* Animation */
+  @keyframes b2bfFadeIn {
+    from { opacity:0; transform:translateY(10px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .b2bf-hero { padding: 40px 20px 36px; }
+    .b2bf-email-row { flex-direction: column; }
+    .b2bf-grid { grid-template-columns: 1fr; }
+    .b2bf-main { padding: 0 16px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="b2bf-wrap">
+
+<!-- Header -->
+<div class="b2bf-header">
+  <div class="b2bf-header-logo">B2B FUSION</div>
+</div>
+
+<!-- Hero -->
+<div class="b2bf-hero">
+  <div class="b2bf-badge">GTM AI-Powered Market Intelligence</div>
+  <h1>Outside-In Market Diagnostics</h1>
+  <p>GTM AI-sourced signals across LinkedIn, G2, search, and community conversations. Fully sourced, no prep needed on your side, created in about an hour.</p>
+</div>
+
+<!-- Main Content -->
+<div class="b2bf-main">
+
+  <!-- Instructions -->
+  <div class="b2bf-instructions">
+    <h2>Select the box for the diagnostics you want run</h2>
+    <p>Choose one or more. Each is a standalone analysis with full sourcing.</p>
+  </div>
+
+  <!-- Diagnostic Cards -->
+  <div class="b2bf-grid" id="b2bfGrid">
+
+    <div class="b2bf-card" data-diagnostic="market-perception" onclick="b2bfToggle(this)">
+      <div class="b2bf-check">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="b2bf-card-icon b2bf-icon-perception">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+      </div>
+      <h3>Market Perception Diagnostic</h3>
+      <p>How buyers actually describe you versus competitors across reviews, social, and communities.</p>
+    </div>
+
+    <div class="b2bf-card" data-diagnostic="demand-gen-teardown" onclick="b2bfToggle(this)">
+      <div class="b2bf-check">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="b2bf-card-icon b2bf-icon-demandgen">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+      </div>
+      <h3>Demand Gen Teardown</h3>
+      <p>Your buyer journey from the outside in compared with competitors.</p>
+    </div>
+
+    <div class="b2bf-card" data-diagnostic="share-of-voice" onclick="b2bfToggle(this)">
+      <div class="b2bf-check">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="b2bf-card-icon b2bf-icon-sov">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <h3>Share of Voice</h3>
+      <p>Where competitors dominate LinkedIn, G2, and search conversations.</p>
+    </div>
+
+    <div class="b2bf-card" data-diagnostic="content-seo-gaps" onclick="b2bfToggle(this)">
+      <div class="b2bf-check">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="b2bf-card-icon b2bf-icon-seo">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <h3>Content & SEO Gaps</h3>
+      <p>Where competitors rank and publish that you do not.</p>
+    </div>
+
+    <div class="b2bf-card" data-diagnostic="influencer-community-map" onclick="b2bfToggle(this)">
+      <div class="b2bf-check">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="b2bf-card-icon b2bf-icon-influencer">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>Influencer & Community Map</h3>
+      <p>Which voices shape your category and who competitors partner with across podcasts, frameworks, conferences, and thought leadership.</p>
+    </div>
+
+    <div class="b2bf-card" data-diagnostic="buying-trigger-map" onclick="b2bfToggle(this)">
+      <div class="b2bf-check">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="b2bf-card-icon b2bf-icon-trigger">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <h3>Category Buying Trigger Map</h3>
+      <p>What events cause companies to enter the market.</p>
+    </div>
+
+  </div>
+
+  <!-- Selection Count -->
+  <div class="b2bf-count" id="b2bfCount">
+    <span>0</span> diagnostic(s) selected
+  </div>
+
+  <!-- Form -->
+  <div class="b2bf-form" id="b2bfForm">
+    <div class="b2bf-email-row">
+      <input type="email" class="b2bf-email-input" id="b2bfEmail" placeholder="Enter your work email" required>
+      <button class="b2bf-submit" id="b2bfSubmit" disabled onclick="b2bfHandleSubmit()">Request Diagnostics</button>
+    </div>
+    <p class="b2bf-form-note">Fully sourced. Takes about an hour. No prep needed on your side.</p>
+  </div>
+
+  <!-- Success Message -->
+  <div class="b2bf-success" id="b2bfSuccess">
+    <div class="b2bf-success-icon">&#10003;</div>
+    <h2>Request Received</h2>
+    <p>Thanks! Jon will reach out shortly to confirm your diagnostic(s) and share the results.</p>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="b2bf-footer">
+  &copy; 2026 <a href="https://b2bfusiongroup.com" target="_blank">B2B Fusion Group</a> &middot; GTM AI-Powered Market Intelligence
+</div>
+
+</div><!-- end .b2bf-wrap -->
+
+<script>
+  // ════════════════════════════════════════════════
+  // CONFIGURATION - Update these two values:
+  // ════════════════════════════════════════════════
+
+  // 1. Your Formspree endpoint (e.g., "https://formspree.io/f/xabc1234")
+  var B2BF_FORMSPREE_URL = "YOUR_FORMSPREE_ENDPOINT_HERE";
+
+  // 2. Your Slack webhook URL (e.g., "https://hooks.slack.com/services/T.../B.../xxx")
+  var B2BF_SLACK_WEBHOOK_URL = "YOUR_SLACK_WEBHOOK_URL_HERE";
+
+  // ════════════════════════════════════════════════
+
+  var b2bfSelected = {};
+
+  function b2bfToggle(card) {
+    card.classList.toggle('b2bf-selected');
+    var diag = card.getAttribute('data-diagnostic');
+    if (b2bfSelected[diag]) {
+      delete b2bfSelected[diag];
+    } else {
+      b2bfSelected[diag] = true;
+    }
+    b2bfUpdateUI();
+  }
+
+  function b2bfUpdateUI() {
+    var keys = Object.keys(b2bfSelected);
+    var count = keys.length;
+    document.getElementById('b2bfCount').innerHTML =
+      '<span>' + count + '</span> diagnostic' + (count !== 1 ? 's' : '') + ' selected';
+
+    var email = document.getElementById('b2bfEmail').value.trim();
+    var isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    document.getElementById('b2bfSubmit').disabled = count === 0 || !isValid;
+  }
+
+  document.getElementById('b2bfEmail').addEventListener('input', b2bfUpdateUI);
+
+  var b2bfNames = {
+    'market-perception': 'Market Perception Diagnostic',
+    'demand-gen-teardown': 'Demand Gen Teardown',
+    'share-of-voice': 'Share of Voice',
+    'content-seo-gaps': 'Content & SEO Gaps',
+    'influencer-community-map': 'Influencer & Community Map',
+    'buying-trigger-map': 'Category Buying Trigger Map'
+  };
+
+  function b2bfHandleSubmit() {
+    var btn = document.getElementById('b2bfSubmit');
+    var email = document.getElementById('b2bfEmail').value.trim();
+    var keys = Object.keys(b2bfSelected);
+    var selected = [];
+    for (var i = 0; i < keys.length; i++) {
+      selected.push(b2bfNames[keys[i]]);
+    }
+
+    if (selected.length === 0 || !email) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    // Send to Formspree (email notification)
+    if (B2BF_FORMSPREE_URL && B2BF_FORMSPREE_URL.indexOf('YOUR_') === -1) {
+      var xhr1 = new XMLHttpRequest();
+      xhr1.open('POST', B2BF_FORMSPREE_URL, true);
+      xhr1.setRequestHeader('Content-Type', 'application/json');
+      xhr1.send(JSON.stringify({
+        _subject: 'New Diagnostic Request: ' + selected.join(', '),
+        email: email,
+        diagnostics: selected.join(', '),
+        diagnostics_count: selected.length,
+        submitted_at: new Date().toISOString()
+      }));
+    }
+
+    // Send to Slack (webhook DM notification)
+    if (B2BF_SLACK_WEBHOOK_URL && B2BF_SLACK_WEBHOOK_URL.indexOf('YOUR_') === -1) {
+      var bullets = '';
+      for (var j = 0; j < selected.length; j++) {
+        bullets += '\n' + String.fromCharCode(8226) + ' ' + selected[j];
+      }
+      var xhr2 = new XMLHttpRequest();
+      xhr2.open('POST', B2BF_SLACK_WEBHOOK_URL, true);
+      xhr2.send(JSON.stringify({
+        text: ':microscope: *New Diagnostic Request*\n\n*Email:* ' + email + '\n*Diagnostics Selected (' + selected.length + '):*' + bullets + '\n\n_Submitted ' + new Date().toLocaleString() + '_'
+      }));
+    }
+
+    // Show success
+    document.getElementById('b2bfForm').style.display = 'none';
+    document.getElementById('b2bfCount').style.display = 'none';
+    document.getElementById('b2bfGrid').style.opacity = '0.5';
+    document.getElementById('b2bfGrid').style.pointerEvents = 'none';
+    document.getElementById('b2bfSuccess').className = 'b2bf-success b2bf-visible';
+  }
+</script>
+
+</body>
+</html>
