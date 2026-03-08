@@ -389,7 +389,7 @@
         <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
       </div>
       <h3>Demand Gen Teardown</h3>
-      <p>Your buyer journey from the outside in compared with competitors.</p>
+      <p>Your buyer journey from the outside in compared with competitors. (Note: this one is the most tricky to complete in absence of info from you, results may vary).</p>
     </div>
 
     <div class="b2bf-card" data-diagnostic="share-of-voice" onclick="b2bfToggle(this)">
@@ -447,6 +447,9 @@
   <div class="b2bf-form" id="b2bfForm">
     <div class="b2bf-email-row">
       <input type="email" class="b2bf-email-input" id="b2bfEmail" placeholder="Enter your work email" required>
+    </div>
+    <div class="b2bf-email-row" style="margin-top:12px;">
+      <input type="text" class="b2bf-email-input" id="b2bfDomain" placeholder="Company domain (e.g. acme.com)" required>
       <button class="b2bf-submit" id="b2bfSubmit" disabled onclick="b2bfHandleSubmit()">Request Diagnostics</button>
     </div>
     <p class="b2bf-form-note">Fully sourced. Takes about an hour. No prep needed on your side.</p>
@@ -501,11 +504,13 @@
       '<span>' + count + '</span> diagnostic' + (count !== 1 ? 's' : '') + ' selected';
 
     var email = document.getElementById('b2bfEmail').value.trim();
-    var isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    var domain = document.getElementById('b2bfDomain').value.trim();
+    var isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && domain.length > 0;
     document.getElementById('b2bfSubmit').disabled = count === 0 || !isValid;
   }
 
   document.getElementById('b2bfEmail').addEventListener('input', b2bfUpdateUI);
+  document.getElementById('b2bfDomain').addEventListener('input', b2bfUpdateUI);
 
   var b2bfNames = {
     'market-perception': 'Market Perception Diagnostic',
@@ -519,6 +524,7 @@
   function b2bfHandleSubmit() {
     var btn = document.getElementById('b2bfSubmit');
     var email = document.getElementById('b2bfEmail').value.trim();
+    var domain = document.getElementById('b2bfDomain').value.trim();
     var keys = Object.keys(b2bfSelected);
     var selected = [];
     for (var i = 0; i < keys.length; i++) {
@@ -538,6 +544,7 @@
       xhr1.send(JSON.stringify({
         _subject: 'New Diagnostic Request: ' + selected.join(', '),
         email: email,
+        company_domain: domain,
         diagnostics: selected.join(', '),
         diagnostics_count: selected.length,
         submitted_at: new Date().toISOString()
@@ -553,7 +560,7 @@
       var xhr2 = new XMLHttpRequest();
       xhr2.open('POST', B2BF_SLACK_WEBHOOK_URL, true);
       xhr2.send(JSON.stringify({
-        text: ':microscope: *New Diagnostic Request*\n\n*Email:* ' + email + '\n*Diagnostics Selected (' + selected.length + '):*' + bullets + '\n\n_Submitted ' + new Date().toLocaleString() + '_'
+        text: ':microscope: *New Diagnostic Request*\n\n*Email:* ' + email + '\n*Company Domain:* ' + domain + '\n*Diagnostics Selected (' + selected.length + '):*' + bullets + '\n\n_Submitted ' + new Date().toLocaleString() + '_'
       }));
     }
 
