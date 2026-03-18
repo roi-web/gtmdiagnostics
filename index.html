@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GTM AI Market Diagnostics - B2B Fusion Group</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  /*
-   * B2B Fusion - CMO Diagnostic Dashboard
-   * All classes prefixed with "b2bf-" to avoid Divi/WordPress CSS conflicts.
-   * Safe to embed inside a Divi Code Module or upload standalone.
-   */
+<!-- GTM Diagnostics Dashboard - Full Page for Divi Code Module -->
+<!-- Paste this entire block into a Divi Code Module -->
+<!-- Uses b2bf- prefix on all classes to avoid WordPress/Divi CSS conflicts -->
 
+<style>
   :root {
     --b2bf-primary: #1B2A4A;
     --b2bf-accent: #E8553D;
@@ -114,7 +104,7 @@
   /* Cards Grid */
   .b2bf-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin-bottom: 36px;
   }
@@ -131,13 +121,12 @@
   }
   .b2bf-card:hover {
     box-shadow: var(--b2bf-card-hover-shadow);
-    border-color: #C5CCD8;
+    border-color: #CBD2DE;
     transform: translateY(-2px);
   }
   .b2bf-card.b2bf-selected {
     border-color: var(--b2bf-accent);
-    background: #FFF8F6;
-    box-shadow: 0 0 0 3px rgba(232,85,61,0.12), var(--b2bf-card-hover-shadow);
+    box-shadow: 0 0 0 1px var(--b2bf-accent), var(--b2bf-card-hover-shadow);
   }
 
   .b2bf-card-icon {
@@ -192,12 +181,45 @@
   }
 
   /* Card icon colors */
-  .b2bf-icon-perception { background: #EEF2FF; color: #6366F1; }
-  .b2bf-icon-demandgen { background: #FFF7ED; color: #EA580C; }
-  .b2bf-icon-sov { background: #F0FDF4; color: #16A34A; }
-  .b2bf-icon-seo { background: #FDF2F8; color: #DB2777; }
-  .b2bf-icon-influencer { background: #EFF6FF; color: #2563EB; }
-  .b2bf-icon-trigger { background: #FEF9C3; color: #CA8A04; }
+  .b2bf-icon-positioning { background: #EEF2FF; color: #6366F1; }
+  .b2bf-icon-demandgen  { background: #FFF7ED; color: #EA580C; }
+  .b2bf-icon-seo        { background: #FDF2F8; color: #DB2777; }
+  .b2bf-icon-influencer  { background: #EFF6FF; color: #2563EB; }
+  .b2bf-icon-trigger     { background: #FEF9C3; color: #CA8A04; }
+
+  /* Bottom row centering for 2 cards */
+  .b2bf-grid .b2bf-card:nth-child(4) {
+    grid-column-start: 1;
+  }
+  .b2bf-grid-5 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 36px;
+  }
+  .b2bf-bottom-row {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  .b2bf-bottom-row .b2bf-card {
+    width: calc(33.333% - 7px);
+    flex-shrink: 0;
+  }
+
+  /* Counter */
+  .b2bf-count {
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: var(--b2bf-text-secondary);
+    font-weight: 500;
+  }
+  .b2bf-count span {
+    color: var(--b2bf-accent);
+    font-weight: 700;
+  }
 
   /* Form */
   .b2bf-form {
@@ -207,13 +229,11 @@
     box-shadow: var(--b2bf-card-shadow);
     border: 1px solid var(--b2bf-border);
   }
-
   .b2bf-email-row {
     display: flex;
     gap: 12px;
     align-items: stretch;
   }
-
   .b2bf-email-input {
     flex: 1;
     padding: 14px 18px;
@@ -232,7 +252,6 @@
   .b2bf-email-input::placeholder {
     color: var(--b2bf-text-light);
   }
-
   .b2bf-submit {
     padding: 14px 32px;
     background: var(--b2bf-accent);
@@ -255,24 +274,11 @@
     cursor: not-allowed;
     transform: none;
   }
-
   .b2bf-form-note {
     margin-top: 12px;
     font-size: 13px;
     color: var(--b2bf-text-light);
     text-align: center;
-  }
-
-  .b2bf-count {
-    text-align: center;
-    margin-bottom: 16px;
-    font-size: 14px;
-    color: var(--b2bf-text-secondary);
-    font-weight: 500;
-  }
-  .b2bf-count span {
-    color: var(--b2bf-accent);
-    font-weight: 700;
   }
 
   /* Success State */
@@ -334,245 +340,200 @@
   }
 
   /* Responsive */
+  @media (max-width: 768px) {
+    .b2bf-grid-5 { grid-template-columns: 1fr 1fr; }
+    .b2bf-bottom-row { flex-direction: column; align-items: center; }
+    .b2bf-bottom-row .b2bf-card { width: 100%; max-width: 400px; }
+  }
   @media (max-width: 600px) {
     .b2bf-hero { padding: 40px 20px 36px; }
     .b2bf-email-row { flex-direction: column; }
-    .b2bf-grid { grid-template-columns: 1fr; }
+    .b2bf-grid-5 { grid-template-columns: 1fr; }
     .b2bf-main { padding: 0 16px 40px; }
   }
 </style>
-</head>
-<body>
 
 <div class="b2bf-wrap">
 
-<!-- Header -->
-<div class="b2bf-header">
-  <div class="b2bf-header-logo">B2B FUSION</div>
+  <!-- Header -->
+  <div class="b2bf-header">
+    <div class="b2bf-header-logo">B2B FUSION</div>
+  </div>
+
+  <!-- Hero -->
+  <div class="b2bf-hero">
+    <div class="b2bf-badge">GTM AI-POWERED MARKET INTELLIGENCE</div>
+    <h1>Outside-In Market Diagnostics</h1>
+    <p>AI-synthesized GTM signals across LinkedIn, G2, search, and industry conversations—cross-referenced to surface patterns that impact pipeline. No prep required on your side.</p>
+  </div>
+
+  <!-- Main Content -->
+  <div class="b2bf-main">
+
+    <!-- Instructions -->
+    <div class="b2bf-instructions">
+      <h2>Select the box for the diagnostics you want run</h2>
+      <p>Choose one or more. Each is a standalone analysis with full sourcing.</p>
+    </div>
+
+    <!-- Cards Grid: Top Row (3) -->
+    <div class="b2bf-grid-5">
+
+      <!-- Card 1: Competitive Positioning Audit -->
+      <div class="b2bf-card" onclick="this.classList.toggle('b2bf-selected'); b2bfUpdateCount();">
+        <div class="b2bf-card-icon b2bf-icon-positioning">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path><path d="M11 8v6M8 11h6"></path></svg>
+        </div>
+        <div class="b2bf-check">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Competitive Positioning Audit</h3>
+        <p>How the market actually sees you vs. how you think they see you. We audit buyer reviews, competitor messaging, analyst coverage, and community conversations to surface the gaps between your positioning and reality.</p>
+      </div>
+
+      <!-- Card 2: Demand Gen Teardown -->
+      <div class="b2bf-card" onclick="this.classList.toggle('b2bf-selected'); b2bfUpdateCount();">
+        <div class="b2bf-card-icon b2bf-icon-demandgen">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"></path></svg>
+        </div>
+        <div class="b2bf-check">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Demand Gen Teardown</h3>
+        <p>We walk your buyer journey as a prospect would — from first search to demo request to follow-up — and compare it side-by-side against competitors. Where are you losing deals before sales even knows?</p>
+      </div>
+
+      <!-- Card 3: Content & SEO Gaps -->
+      <div class="b2bf-card" onclick="this.classList.toggle('b2bf-selected'); b2bfUpdateCount();">
+        <div class="b2bf-card-icon b2bf-icon-seo">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        </div>
+        <div class="b2bf-check">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Content & SEO Gaps</h3>
+        <p>Where competitors rank and publish that you do not. We map the topics, keywords, and content formats your competitors own — and identify the highest-value gaps you can fill fastest.</p>
+      </div>
+
+      <!-- Bottom Row (2 centered) -->
+      <div class="b2bf-bottom-row">
+
+        <!-- Card 4: Influencer & Community Map -->
+        <div class="b2bf-card" onclick="this.classList.toggle('b2bf-selected'); b2bfUpdateCount();">
+          <div class="b2bf-card-icon b2bf-icon-influencer">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <div class="b2bf-check">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Influencer & Community Map</h3>
+          <p>Which voices shape your category and who competitors partner with across podcasts, conferences, analyst coverage, and thought leadership. Ranked by deal influence, not follower count.</p>
+        </div>
+
+        <!-- Card 5: Category Buying Trigger Map -->
+        <div class="b2bf-card" onclick="this.classList.toggle('b2bf-selected'); b2bfUpdateCount();">
+          <div class="b2bf-card-icon b2bf-icon-trigger">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          </div>
+          <div class="b2bf-check">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Category Buying Trigger Map</h3>
+          <p>The events, policy changes, and market shifts that cause companies to start evaluating providers — before they ever show up in your pipeline. We map what triggers buying decisions in your category so you can be positioned before intent signals fire.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Counter -->
+    <div class="b2bf-count" id="b2bf-counter"><span>0</span> diagnostic(s) selected</div>
+
+    <!-- Form -->
+    <div class="b2bf-form" id="b2bf-form">
+      <div style="margin-bottom: 12px;">
+        <input type="email" class="b2bf-email-input" id="b2bf-email" placeholder="Enter your work email" style="width: 100%;">
+      </div>
+      <div class="b2bf-email-row">
+        <input type="text" class="b2bf-email-input" id="b2bf-domain" placeholder="Company domain (e.g. acme.com)">
+        <button class="b2bf-submit" id="b2bf-submit-btn" disabled onclick="b2bfSubmit()">Request Diagnostics</button>
+      </div>
+      <div class="b2bf-form-note">Fully sourced. Cross-validated. No prep required on your side.</div>
+    </div>
+
+    <!-- Success -->
+    <div class="b2bf-success" id="b2bf-success">
+      <div class="b2bf-success-icon">&#10003;</div>
+      <h2>Request Received!</h2>
+      <p>We'll deliver your diagnostics within the hour. Check your inbox.</p>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="b2bf-footer">
+    &copy; 2026 <a href="https://b2bfusiongroup.com" target="_blank">B2B Fusion Group</a> &middot; GTM AI-Powered Market Intelligence
+  </div>
+
 </div>
-
-<!-- Hero -->
-<div class="b2bf-hero">
-  <div class="b2bf-badge">GTM AI-Powered Market Intelligence</div>
-  <h1>Outside-In Market Diagnostics</h1>
-  <p>GTM AI-sourced signals across LinkedIn, G2, search, and community conversations. Fully sourced, no prep needed on your side, created in about an hour.</p>
-</div>
-
-<!-- Main Content -->
-<div class="b2bf-main">
-
-  <!-- Instructions -->
-  <div class="b2bf-instructions">
-    <h2>Select the box for the diagnostics you want run</h2>
-    <p>Choose one or more. Each is a standalone analysis with full sourcing.</p>
-  </div>
-
-  <!-- Diagnostic Cards -->
-  <div class="b2bf-grid" id="b2bfGrid">
-
-    <div class="b2bf-card" data-diagnostic="market-perception" onclick="b2bfToggle(this)">
-      <div class="b2bf-check">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="b2bf-card-icon b2bf-icon-perception">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
-      </div>
-      <h3>Market Perception Diagnostic</h3>
-      <p>How buyers actually describe you versus competitors across reviews, social, and communities.</p>
-    </div>
-
-    <div class="b2bf-card" data-diagnostic="demand-gen-teardown" onclick="b2bfToggle(this)">
-      <div class="b2bf-check">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="b2bf-card-icon b2bf-icon-demandgen">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
-      </div>
-      <h3>Demand Gen Teardown</h3>
-      <p>Your buyer journey from the outside in compared with competitors. (Note: this one is the most tricky to complete in absence of info from you, results may vary).</p>
-    </div>
-
-    <div class="b2bf-card" data-diagnostic="share-of-voice" onclick="b2bfToggle(this)">
-      <div class="b2bf-check">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="b2bf-card-icon b2bf-icon-sov">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      </div>
-      <h3>Share of Voice</h3>
-      <p>Where competitors dominate LinkedIn, G2, and search conversations.</p>
-    </div>
-
-    <div class="b2bf-card" data-diagnostic="content-seo-gaps" onclick="b2bfToggle(this)">
-      <div class="b2bf-check">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="b2bf-card-icon b2bf-icon-seo">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-      </div>
-      <h3>Content & SEO Gaps</h3>
-      <p>Where competitors rank and publish that you do not.</p>
-    </div>
-
-    <div class="b2bf-card" data-diagnostic="influencer-community-map" onclick="b2bfToggle(this)">
-      <div class="b2bf-check">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="b2bf-card-icon b2bf-icon-influencer">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      </div>
-      <h3>Influencer & Community Map</h3>
-      <p>Which voices shape your category and who competitors partner with across podcasts, frameworks, conferences, and thought leadership.</p>
-    </div>
-
-    <div class="b2bf-card" data-diagnostic="buying-trigger-map" onclick="b2bfToggle(this)">
-      <div class="b2bf-check">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="b2bf-card-icon b2bf-icon-trigger">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-      </div>
-      <h3>Category Buying Trigger Map</h3>
-      <p>What events cause companies to enter the market.</p>
-    </div>
-
-  </div>
-
-  <!-- Selection Count -->
-  <div class="b2bf-count" id="b2bfCount">
-    <span>0</span> diagnostic(s) selected
-  </div>
-
-  <!-- Form -->
-  <div class="b2bf-form" id="b2bfForm">
-    <div class="b2bf-email-row">
-      <input type="email" class="b2bf-email-input" id="b2bfEmail" placeholder="Enter your work email" required>
-    </div>
-    <div class="b2bf-email-row" style="margin-top:12px;">
-      <input type="text" class="b2bf-email-input" id="b2bfDomain" placeholder="Company domain (e.g. acme.com)" required>
-      <button class="b2bf-submit" id="b2bfSubmit" disabled onclick="b2bfHandleSubmit()">Request Diagnostics</button>
-    </div>
-    <p class="b2bf-form-note">Fully sourced. Takes about an hour. No prep needed on your side.</p>
-  </div>
-
-  <!-- Success Message -->
-  <div class="b2bf-success" id="b2bfSuccess">
-    <div class="b2bf-success-icon">&#10003;</div>
-    <h2>Request Received</h2>
-    <p>Thanks! Jon will reach out shortly to confirm your diagnostic(s) and share the results.</p>
-  </div>
-
-</div>
-
-<!-- Footer -->
-<div class="b2bf-footer">
-  &copy; 2026 <a href="https://b2bfusiongroup.com" target="_blank">B2B Fusion Group</a> &middot; GTM AI-Powered Market Intelligence
-</div>
-
-</div><!-- end .b2bf-wrap -->
 
 <script>
-  // ════════════════════════════════════════════════
-  // CONFIGURATION - Update these two values:
-  // ════════════════════════════════════════════════
+function b2bfUpdateCount() {
+  var count = document.querySelectorAll('.b2bf-selected').length;
+  document.getElementById('b2bf-counter').innerHTML = '<span>' + count + '</span> diagnostic(s) selected';
+  var email = document.getElementById('b2bf-email').value.trim();
+  var domain = document.getElementById('b2bf-domain').value.trim();
+  document.getElementById('b2bf-submit-btn').disabled = !(count > 0 && email.length > 0 && domain.length > 0);
+}
 
-  // 1. Your Formspree endpoint (e.g., "https://formspree.io/f/xabc1234")
-  var B2BF_FORMSPREE_URL = "https://formspree.io/f/xeerovwr";
+document.getElementById('b2bf-email').addEventListener('input', b2bfUpdateCount);
+document.getElementById('b2bf-domain').addEventListener('input', b2bfUpdateCount);
 
-  // 2. Your Slack webhook URL (e.g., "https://hooks.slack.com/services/T.../B.../xxx")
-  var B2BF_SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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";
+function b2bfSubmit() {
+  var selected = [];
+  document.querySelectorAll('.b2bf-selected h3').forEach(function(h) { selected.push(h.textContent); });
+  var email = document.getElementById('b2bf-email').value.trim();
+  var domain = document.getElementById('b2bf-domain').value.trim();
+  var btn = document.getElementById('b2bf-submit-btn');
 
-  // ════════════════════════════════════════════════
+  // Disable button and show sending state
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
 
-  var b2bfSelected = {};
+  // =====================================================
+  // FORMSPREE ENDPOINT — Replace YOUR_FORM_ID below
+  // e.g. https://formspree.io/f/xyzabc12
+  // =====================================================
+  var FORMSPREE_URL = 'https://formspree.io/f/xeerovwr';
 
-  function b2bfToggle(card) {
-    card.classList.toggle('b2bf-selected');
-    var diag = card.getAttribute('data-diagnostic');
-    if (b2bfSelected[diag]) {
-      delete b2bfSelected[diag];
+  fetch(FORMSPREE_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify({
+      email: email,
+      company_domain: domain,
+      diagnostics_selected: selected.join(', '),
+      diagnostics_count: selected.length,
+      _subject: 'New GTM Diagnostic Request: ' + domain
+    })
+  })
+  .then(function(response) {
+    if (response.ok) {
+      document.getElementById('b2bf-form').style.display = 'none';
+      document.getElementById('b2bf-counter').style.display = 'none';
+      var success = document.getElementById('b2bf-success');
+      success.classList.add('b2bf-visible');
     } else {
-      b2bfSelected[diag] = true;
+      throw new Error('Form submission failed');
     }
-    b2bfUpdateUI();
-  }
-
-  function b2bfUpdateUI() {
-    var keys = Object.keys(b2bfSelected);
-    var count = keys.length;
-    document.getElementById('b2bfCount').innerHTML =
-      '<span>' + count + '</span> diagnostic' + (count !== 1 ? 's' : '') + ' selected';
-
-    var email = document.getElementById('b2bfEmail').value.trim();
-    var domain = document.getElementById('b2bfDomain').value.trim();
-    var isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && domain.length > 0;
-    document.getElementById('b2bfSubmit').disabled = count === 0 || !isValid;
-  }
-
-  document.getElementById('b2bfEmail').addEventListener('input', b2bfUpdateUI);
-  document.getElementById('b2bfDomain').addEventListener('input', b2bfUpdateUI);
-
-  var b2bfNames = {
-    'market-perception': 'Market Perception Diagnostic',
-    'demand-gen-teardown': 'Demand Gen Teardown',
-    'share-of-voice': 'Share of Voice',
-    'content-seo-gaps': 'Content & SEO Gaps',
-    'influencer-community-map': 'Influencer & Community Map',
-    'buying-trigger-map': 'Category Buying Trigger Map'
-  };
-
-  function b2bfHandleSubmit() {
-    var btn = document.getElementById('b2bfSubmit');
-    var email = document.getElementById('b2bfEmail').value.trim();
-    var domain = document.getElementById('b2bfDomain').value.trim();
-    var keys = Object.keys(b2bfSelected);
-    var selected = [];
-    for (var i = 0; i < keys.length; i++) {
-      selected.push(b2bfNames[keys[i]]);
-    }
-
-    if (selected.length === 0 || !email) return;
-
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-
-    // Send to Formspree (email notification)
-    if (B2BF_FORMSPREE_URL && B2BF_FORMSPREE_URL.indexOf('YOUR_') === -1) {
-      var xhr1 = new XMLHttpRequest();
-      xhr1.open('POST', B2BF_FORMSPREE_URL, true);
-      xhr1.setRequestHeader('Content-Type', 'application/json');
-      xhr1.send(JSON.stringify({
-        _subject: 'New Diagnostic Request: ' + selected.join(', '),
-        email: email,
-        company_domain: domain,
-        diagnostics: selected.join(', '),
-        diagnostics_count: selected.length,
-        submitted_at: new Date().toISOString()
-      }));
-    }
-
-    // Send to Slack (webhook DM notification)
-    if (B2BF_SLACK_WEBHOOK_URL && B2BF_SLACK_WEBHOOK_URL.indexOf('YOUR_') === -1) {
-      var bullets = '';
-      for (var j = 0; j < selected.length; j++) {
-        bullets += '\n' + String.fromCharCode(8226) + ' ' + selected[j];
-      }
-      var xhr2 = new XMLHttpRequest();
-      xhr2.open('POST', B2BF_SLACK_WEBHOOK_URL, true);
-      xhr2.send(JSON.stringify({
-        text: ':microscope: *New Diagnostic Request*\n\n*Email:* ' + email + '\n*Company Domain:* ' + domain + '\n*Diagnostics Selected (' + selected.length + '):*' + bullets + '\n\n_Submitted ' + new Date().toLocaleString() + '_'
-      }));
-    }
-
-    // Show success
-    document.getElementById('b2bfForm').style.display = 'none';
-    document.getElementById('b2bfCount').style.display = 'none';
-    document.getElementById('b2bfGrid').style.opacity = '0.5';
-    document.getElementById('b2bfGrid').style.pointerEvents = 'none';
-    document.getElementById('b2bfSuccess').className = 'b2bf-success b2bf-visible';
-  }
+  })
+  .catch(function(error) {
+    btn.disabled = false;
+    btn.textContent = 'Request Diagnostics';
+    alert('Something went wrong. Please try again or email us directly.');
+    console.error('Formspree error:', error);
+  });
+}
 </script>
-
-</body>
-</html>
-
